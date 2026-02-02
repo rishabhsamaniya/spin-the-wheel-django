@@ -1,0 +1,11 @@
+{% extends "gamification/base.html" %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<h2>Welcome 🎉</h2>
+<p>You are eligible to spin & win exciting rewards.</p>
+
+<a href="{% url 'spin' %}">
+  <button>Spin the Wheel 🎡</button>
+</a>
+{% endblock %}

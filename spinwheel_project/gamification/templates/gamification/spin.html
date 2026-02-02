@@ -1,0 +1,100 @@
+{% extends "gamification/base.html" %}
+{% block title %}Spin the Wheel{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center">Spin & Win 🎉</h2>
+
+<!-- Wheel Container -->
+<div class="wheel-container">
+  <div id="wheel">
+    <span class="label">Health<br>&<br>Wellness</span>
+  </div>
+</div>
+
+<!-- Spin Button -->
+<button id="spinBtn" onclick="spinWheel()">SPIN NOW</button>
+
+<!-- Result Popup -->
+<div id="resultBox" class="result-box">
+  <h3>🎉 Congratulations!</h3>
+  <p>You won <b>Health & Wellness</b> reward</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Continue</button>
+  </form>
+</div>
+
+<style>
+/* Wheel */
+.wheel-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+#wheel {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #e60000 0deg 360deg
+  );
+  border: 10px solid #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  position: relative;
+  transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Result Box */
+.result-box {
+  display: none;
+  margin-top: 30px;
+  padding: 20px;
+  border: 2px solid #e60000;
+  border-radius: 8px;
+  text-align: center;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.result-box h3 {
+  color: #e60000;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+
+<script>
+let hasSpun = false;
+
+function spinWheel() {
+  if (hasSpun) return;
+
+  hasSpun = true;
+  document.getElementById("spinBtn").disabled = true;
+
+  const wheel = document.getElementById("wheel");
+  const degree = 360 * 6 + 120; // multiple spins + stop angle
+
+  wheel.style.transform = `rotate(${degree}deg)`;
+
+  setTimeout(() => {
+    document.getElementById("resultBox").style.display = "block";
+  }, 4000);
+}
+</script>
+
+{% endblock %}

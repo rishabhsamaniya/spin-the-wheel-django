@@ -1,0 +1,16 @@
+{% extends "gamification/base.html" %}
+{% block title %}Address{% endblock %}
+
+{% block content %}
+<h2>Delivery Address</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="full_name" placeholder="Full Name" required>
+  <input type="text" name="address" placeholder="Address" required>
+  <input type="text" name="city" placeholder="City" required>
+  <input type="text" name="state" placeholder="State" required>
+  <input type="text" name="pincode" placeholder="Pincode" required>
+  <button>Place Order</button>
+</form>
+{% endblock %}

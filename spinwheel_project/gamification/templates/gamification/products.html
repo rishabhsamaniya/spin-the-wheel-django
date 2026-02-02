@@ -1,0 +1,16 @@
+{% extends "gamification/base.html" %}
+{% block title %}Choose Product{% endblock %}
+
+{% block content %}
+<h2>Select Your Reward</h2>
+
+{% for product in products %}
+<div class="card">
+  <h3>{{ product.name }}</h3>
+  <p>{{ product.description }}</p>
+  <a href="{% url 'select_product' product.id %}">
+    <button>Avail Now</button>
+  </a>
+</div>
+{% endfor %}
+{% endblock %}

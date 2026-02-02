@@ -1,0 +1,12 @@
+{% extends "gamification/base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Enter Mobile Number</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="mobile" placeholder="10 digit mobile number" required>
+  <button type="submit">Send OTP</button>
+</form>
+{% endblock %}
